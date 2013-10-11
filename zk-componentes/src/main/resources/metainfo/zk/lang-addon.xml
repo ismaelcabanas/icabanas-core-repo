@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ZK cargará este fichero automáticamente -->
+<language-addon>
+
+	<!-- Nombre del addon, es preferible que sea único -->
+	<addon-name>custom</addon-name>
+	
+	<!-- Especifica el nombre de la definición del lenguaje -->
+	<language-name>xul/html</language-name>
+  
+  	<version>
+  		<version-class>org.icabanas.zk.Version</version-class>
+  		<version-uid>0.0.1</version-uid>
+  		<zk-version>6.0.5</zk-version> <!-- o superior -->
+  	</version>
+  	
+  	<!-- se define el componente -->
+	<component>
+		<!-- El nombre del componente debe ser obligatorio y único -->
+		<component-name>errmsg</component-name>
+		
+		<!-- fully-qualified java class name at server side
+            required for a new component that not extends another component -->
+        <component-class>org.icabanas.zk.componentes.errmsg.Errmsg</component-class>
+        
+        <!-- widget class, 'custom.zk.components.Errmsg'
+            also specify the
+            package of widget class 'custom.zk.components'
+            required for a new component that not extends another component
+
+            from my test,
+            when you say a widget class is custom.zk.components.Errmsg
+            it denotes there should have a file
+            web/js/custom/zk/components/Errmsg.js under classpath,
+            and have "<package name="custom.zk.components" ...>...</package>"
+            in web/js/custom/zk/components/zk.wpd
+            and "custom.zk.components.Errmsg = ..."
+            in Errmsg.js to define that client widget
+            
+            You may try play around to find whether you can
+            make them different, but it's better to let them
+            sync even if you can make them different -->
+        <widget-class>org.icabanas.zk.componentes.errmsg.Errmsg</widget-class>
+        
+        <!-- mold
+            required for a new component that not extends another component
+            or has self widget-class
+            
+            a mold denotes the files that to render and style this comopnent -->
+        <mold>
+            <!-- default mold is required -->
+            <mold-name>default</mold-name>
+            <!-- relative path based on widget-class' path
+                (web/js/org/icabanas/zk/componentes/)
+                
+                where errmsg.js (required) contains a function that
+                will render the html of the comopnent,
+                errmsg.css.dsp (optional) contains
+                css styles of this component -->
+            <mold-uri>mold/errmsg.js</mold-uri>
+            <css-uri>css/errmsg.css.dsp</css-uri>
+        </mold>
+	</component>
+
+  	<!-- se define el componente -->
+	<component>
+		<!-- El nombre del componente debe ser obligatorio y único -->
+		<component-name>botonHTML5</component-name>
+		
+		<extends>button</extends>
+		
+		<!-- fully-qualified java class name at server side
+            required for a new component that not extends another component -->
+        <component-class>org.icabanas.zk.componentes.html5.BotonHTML5</component-class>
+        
+        <!-- widget class, 'custom.zk.components.Errmsg'
+            also specify the
+            package of widget class 'custom.zk.components'
+            required for a new component that not extends another component
+
+            from my test,
+            when you say a widget class is custom.zk.components.Errmsg
+            it denotes there should have a file
+            web/js/custom/zk/components/Errmsg.js under classpath,
+            and have "<package name="custom.zk.components" ...>...</package>"
+            in web/js/custom/zk/components/zk.wpd
+            and "custom.zk.components.Errmsg = ..."
+            in Errmsg.js to define that client widget
+            
+            You may try play around to find whether you can
+            make them different, but it's better to let them
+            sync even if you can make them different -->
+        <widget-class>org.icabanas.zk.componentes.html5.BotonHTML5</widget-class>
+        
+        <!-- mold
+            required for a new component that not extends another component
+            or has self widget-class
+            
+            a mold denotes the files that to render and style this comopnent -->
+        <mold>
+            <!-- default mold is required -->
+            <mold-name>default</mold-name>
+            <!-- relative path based on widget-class' path
+                (web/js/org/icabanas/zk/componentes/)
+                
+                where errmsg.js (required) contains a function that
+                will render the html of the comopnent,
+                errmsg.css.dsp (optional) contains
+                css styles of this component 
+            <mold-uri>mold/botonHTML5.js</mold-uri> -->
+           
+            <css-uri>css/botonHTML5.css.dsp</css-uri>
+        </mold>
+	</component>
+	
+	<component>
+		<!-- El nombre del componente debe ser obligatorio y único -->
+		<component-name>aHTML5</component-name>
+		
+        <component-class>org.icabanas.zk.componentes.html5.AHTML5</component-class>
+        
+        <widget-class>org.icabanas.zk.componentes.html5.AHTML5</widget-class>
+        <!-- 
+        <mold>
+            <mold-name>default</mold-name>
+            <mold-uri>mold/aHTML5.js</mold-uri>
+        </mold>
+         -->
+	</component>
+</language-addon>

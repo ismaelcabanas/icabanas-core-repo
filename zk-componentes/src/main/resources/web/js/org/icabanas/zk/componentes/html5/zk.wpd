@@ -1,0 +1,9 @@
+<!-- this file define the package name and the order to load widgets -->
+<!-- depends="zul" denotes this package should -->
+<!-- be loaded after the zul package, -->
+<!-- i.e., if you load this package but the zul package is not loaded, -->
+<!-- the framework will load zul package first automatically -->
+<package name="org.icabanas.zk.componentes.html5" language="xul/html" depends="zul.wgt">
+    <widget name="BotonHTML5"/>
+    <widget name="AHTML5"/>
+</package>
