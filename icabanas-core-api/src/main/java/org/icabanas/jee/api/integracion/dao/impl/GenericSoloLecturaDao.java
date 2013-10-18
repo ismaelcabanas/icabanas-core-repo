@@ -17,7 +17,7 @@ import org.icabanas.jee.api.integracion.dao.IPaginador;
 import org.icabanas.jee.api.integracion.dao.util.DAOUtil;
 
 /**
- * Implementación abstracta de {@link IGenericSoloLecturaDao}.
+ * Implementaciï¿½n abstracta de {@link IGenericSoloLecturaDao}.
  * 
  * <br/><br/>
  * <b>Responsabilidad</b> Implementa de forma general las operaciones de lectura sobre entidades.  
@@ -29,7 +29,7 @@ import org.icabanas.jee.api.integracion.dao.util.DAOUtil;
  * @param <Id>
  * @param <Entidad>
  */
-public class AbstractGenericSoloLecturaDao<Id extends Serializable, Entidad> implements
+public class GenericSoloLecturaDao<Id extends Serializable, Entidad> implements
 		IGenericSoloLecturaDao<Id, Entidad> {
 
 	protected Class<Entidad> persistentClass;
@@ -41,11 +41,11 @@ public class AbstractGenericSoloLecturaDao<Id extends Serializable, Entidad> imp
 
 //	private IProcesadorConsultas<Entidad> procesadorConsultas;
 	
-	public AbstractGenericSoloLecturaDao() {
-		this.persistentClass = (Class<Entidad>) DAOUtil.getTypeArguments(AbstractGenericSoloLecturaDao.class, this.getClass()).get(1);
+	public GenericSoloLecturaDao() {
+		this.persistentClass = (Class<Entidad>) DAOUtil.getTypeArguments(GenericSoloLecturaDao.class, this.getClass()).get(1);
 	}
 	
-	public AbstractGenericSoloLecturaDao(Class<Entidad> persistentClass) {
+	public GenericSoloLecturaDao(Class<Entidad> persistentClass) {
 		super();
 		this.persistentClass = persistentClass;
 	}
@@ -89,8 +89,8 @@ public class AbstractGenericSoloLecturaDao<Id extends Serializable, Entidad> imp
 //	public ResultadoPaginado<Entidad> buscarTodos(int paginaActual,
 //			int numeroRegistrosPorPagina) throws DaoException {
 //		try{
-//			Validate.isTrue(paginaActual >= 1, "La página actual de la paginación debe ser >= 1.");
-//			Validate.isTrue(numeroRegistrosPorPagina > 0, "La página actual de la paginación debe ser > 0.");
+//			Validate.isTrue(paginaActual >= 1, "La pï¿½gina actual de la paginaciï¿½n debe ser >= 1.");
+//			Validate.isTrue(numeroRegistrosPorPagina > 0, "La pï¿½gina actual de la paginaciï¿½n debe ser > 0.");
 //			
 //			int numeroTotalRegistros = gestorPersistencia.contarRegistros();
 //			
@@ -122,10 +122,10 @@ public class AbstractGenericSoloLecturaDao<Id extends Serializable, Entidad> imp
 	
 	public IPaginador<Entidad> paginar(IPaginador<Entidad> pagina) throws DaoException {
 		try{
-			Validate.isTrue(pagina != null, "El parámetro pagina no puede ser nulo.");
-			Validate.isTrue(pagina.getPagina() >= 1, "La página actual de la paginación debe ser >= 1.");
-			Validate.isTrue(pagina.getNumeroRegistrosPorPagina() > 0, "El número de registros por página debe ser > 0.");
-			Validate.isTrue(pagina.getFiltro() != null, "El parámetro filtro no puede ser nulo.");
+			Validate.isTrue(pagina != null, "El parï¿½metro pagina no puede ser nulo.");
+			Validate.isTrue(pagina.getPagina() >= 1, "La pï¿½gina actual de la paginaciï¿½n debe ser >= 1.");
+			Validate.isTrue(pagina.getNumeroRegistrosPorPagina() > 0, "El nï¿½mero de registros por pï¿½gina debe ser > 0.");
+			Validate.isTrue(pagina.getFiltro() != null, "El parï¿½metro filtro no puede ser nulo.");
 			
 			pagina = gestorPersistencia.paginar(pagina, persistentClass, criteriaBuilderMap.get(pagina.getFiltro().getNombreFiltro()));
 			
@@ -159,7 +159,7 @@ public class AbstractGenericSoloLecturaDao<Id extends Serializable, Entidad> imp
 	@Override
 	public List<Entidad> buscar(IFiltro filtro) throws DaoException {
 		try{
-			Validate.isTrue(filtro != null, "El parámetro filtro no puede ser nulo.");
+			Validate.isTrue(filtro != null, "El parï¿½metro filtro no puede ser nulo.");
 			
 			List<Entidad> registros = new ArrayList<Entidad>();
 			

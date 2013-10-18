@@ -20,7 +20,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 @RunWith(MockitoJUnitRunner.class)
 public class GenericSoloLecturaDaoTest {
 	
-	private AbstractGenericSoloLecturaDao<Long, Persona> _dao;
+	private GenericSoloLecturaDao<Long, Persona> _dao;
 	
 	@Mock
 	private IGestorPersistencia _mockGestorPersistencia;
@@ -39,10 +39,10 @@ public class GenericSoloLecturaDaoTest {
 	
 	@Test
 	public void deberia_crear_instancia(){
-		// preparación y ejecución
-		AbstractGenericSoloLecturaDao<Long, Persona> dao = new PersonaDaoImpl();
+		// preparaciï¿½n y ejecuciï¿½n
+		GenericSoloLecturaDao<Long, Persona> dao = new PersonaDaoImpl();
 		
-		//verificación
+		//verificaciï¿½n
 		Assert.assertThat(dao, IsNull.notNullValue());
 		Assert.assertThat(dao.getGestorPersistencia(), IsNull.nullValue());
 		Assert.assertThat(dao.getPersistentClass(), IsEqual.equalTo(Persona.class));
@@ -51,13 +51,13 @@ public class GenericSoloLecturaDaoTest {
 	
 	@Test
 	public void deberia_crear_instancia_con_gestor_persistencia(){
-		// preparación y ejecución
-		AbstractGenericSoloLecturaDao<Long, Persona> dao = new PersonaDaoImpl();
+		// preparaciï¿½n y ejecuciï¿½n
+		GenericSoloLecturaDao<Long, Persona> dao = new PersonaDaoImpl();
 		dao.setGestorPersistencia(_mockGestorPersistencia);		
 //		dao.setProcesadorConsultas(_mockProcesadorConsultas);
 //		Mockito.when(_mockGestorPersistencia.getProcesadorConsultas()).thenReturn(_mockProcesadorConsultas);
 		
-		//verificación
+		//verificaciï¿½n
 		Assert.assertThat(dao, IsNull.notNullValue());
 		Assert.assertThat(dao.getGestorPersistencia(), IsNull.notNullValue());
 //		Assert.assertThat(dao.getProcesadorConsultas(), IsNull.notNullValue());
@@ -66,34 +66,34 @@ public class GenericSoloLecturaDaoTest {
 	
 	@Test(expected=DaoException.class)
 	public void deberia_lanzar_excepcion_si_buscar_por_identificador_nulo(){
-		// preparación
+		// preparaciï¿½n
 		Long id = null;
 		Mockito.when(_mockGestorPersistencia.buscarPorId(id, Persona.class));
 		
-		// ejecución
+		// ejecuciï¿½n
 		_dao.buscarPorId(id);
 		
-		// verificación		
+		// verificaciï¿½n		
 	}
 	
 	@Test
 	public void deberia_buscar_por_identificador(){
-		// preparación
+		// preparaciï¿½n
 		Long id = 1L;
 		Persona entidad = new Persona();
 		Mockito.when(_mockGestorPersistencia.buscarPorId(id, Persona.class)).thenReturn(entidad);
 		
-		// ejecución
+		// ejecuciï¿½n
 		Persona test = _dao.buscarPorId(id);
 		
-		// verificación		
+		// verificaciï¿½n		
 		Mockito.verify(_mockGestorPersistencia, VerificationModeFactory.times(1)).buscarPorId(id, Persona.class);
 		Assert.assertThat(test, IsEqual.equalTo(entidad));
 	}
 	
 	@Test
 	public void deberia_devolver_todos_los_registros_sin_paginar(){
-		// preparación
+		// preparaciï¿½n
 		List<Persona> listaRegistros = new ArrayList<Persona>();
 		listaRegistros.add(new Persona("1"));
 		listaRegistros.add(new Persona("2"));
@@ -105,10 +105,10 @@ public class GenericSoloLecturaDaoTest {
 		listaRegistros.add(new Persona("8"));
 		Mockito.when(_mockGestorPersistencia.buscarTodos(Persona.class)).thenReturn(listaRegistros);
 		
-		// ejecución
+		// ejecuciï¿½n
 		List<Persona> resultado = _dao.buscarTodos();
 		
-		// verificación
+		// verificaciï¿½n
 		Mockito.verify(_mockGestorPersistencia,VerificationModeFactory.times(1)).buscarTodos(Persona.class);
 		Assert.assertThat(resultado, IsNull.notNullValue());
 		Assert.assertThat(resultado, IsNull.notNullValue());
@@ -117,7 +117,7 @@ public class GenericSoloLecturaDaoTest {
 	
 //	@Test
 //	public void deberia_devolver_todos_los_registros_de_la_pagina_2(){
-//		// preparación
+//		// preparaciï¿½n
 //		List<Persona> listaRegistros = new ArrayList<Persona>();
 //		listaRegistros.add(new Persona("1"));
 //		listaRegistros.add(new Persona("2"));
@@ -134,10 +134,10 @@ public class GenericSoloLecturaDaoTest {
 //		Mockito.when(_mockGestorPersistencia.contarRegistros()).thenReturn(8);
 //		Mockito.when(_mockGestorPersistencia.buscarTodos(2,3)).thenReturn(listaRegistrosPagina2);		
 //		
-//		// ejecución
+//		// ejecuciï¿½n
 //		ResultadoPaginado<Persona> resultado = _dao.buscarTodos(2,3);
 //		
-//		// verificación
+//		// verificaciï¿½n
 //		Assert.assertThat(resultado, IsNull.notNullValue());
 //		Assert.assertThat(resultado.getElementos(), IsNull.notNullValue());
 //		Assert.assertThat(resultado.getElementos().size(), IsEqual.equalTo(3));
@@ -151,7 +151,7 @@ public class GenericSoloLecturaDaoTest {
 
 //	@Test
 //	public void deberia_devolver_resultado_vacio_si_busca_paginada_pero_no_hay_registros(){
-//		// preparación
+//		// preparaciï¿½n
 //		List<Persona> listaRegistros = new ArrayList<Persona>();
 //		listaRegistros.add(new Persona("1"));
 //		listaRegistros.add(new Persona("2"));
@@ -165,10 +165,10 @@ public class GenericSoloLecturaDaoTest {
 //		Mockito.when(_mockGestorPersistencia.contarRegistros()).thenReturn(0);
 //		Mockito.when(_mockGestorPersistencia.buscarTodos(2,3)).thenReturn(listaRegistrosPagina2);		
 //		
-//		// ejecución
+//		// ejecuciï¿½n
 //		ResultadoPaginado<Persona> resultado = _dao.buscarTodos(2,3);
 //		
-//		// verificación
+//		// verificaciï¿½n
 //		Assert.assertThat(resultado, IsNull.notNullValue());
 //		Assert.assertThat(resultado.getElementos(), IsNull.notNullValue());
 //		Assert.assertThat(resultado.getElementos().size(), IsEqual.equalTo(0));
@@ -179,16 +179,16 @@ public class GenericSoloLecturaDaoTest {
 	
 //	@Test
 //	public void deberia_lanzar_excepcion_si_busca_todos_los_registros_paginados_y_la_pagina_actual_es_0_o_negativa(){
-//		// ejecución
+//		// ejecuciï¿½n
 //		try{
 //			ResultadoPaginado<Persona> resultado = _dao.buscarTodos(0,3);
-//			Assert.fail("Debería lanzar excepción");
+//			Assert.fail("Deberï¿½a lanzar excepciï¿½n");
 //		}
 //		catch(DaoException e){}
 //		
 //		try{
 //			ResultadoPaginado<Persona> resultado = _dao.buscarTodos(-5,3);
-//			Assert.fail("Debería lanzar excepción");
+//			Assert.fail("Deberï¿½a lanzar excepciï¿½n");
 //		}
 //		catch(DaoException e){}
 //		
@@ -198,16 +198,16 @@ public class GenericSoloLecturaDaoTest {
 //	
 //	@Test
 //	public void deberia_lanzar_excepcion_si_busca_todos_los_registros_paginados_y_el_numero_de_registros_por_pagina_es_0_o_negativo(){
-//		// ejecución
+//		// ejecuciï¿½n
 //		try{
 //			ResultadoPaginado<Persona> resultado = _dao.buscarTodos(3,0);
-//			Assert.fail("Debería lanzar excepción");
+//			Assert.fail("Deberï¿½a lanzar excepciï¿½n");
 //		}
 //		catch(DaoException e){}
 //		
 //		try{
 //			ResultadoPaginado<Persona> resultado = _dao.buscarTodos(3,-3);
-//			Assert.fail("Debería lanzar excepción");
+//			Assert.fail("Deberï¿½a lanzar excepciï¿½n");
 //		}
 //		catch(DaoException e){}
 //				
@@ -216,26 +216,26 @@ public class GenericSoloLecturaDaoTest {
 	
 	@Test(expected=DaoException.class)
 	public void deberia_lanzar_excepcion_si_busca_todos_los_registros_y_hay_problemas_al_realizar_consulta(){
-		// preparación
+		// preparaciï¿½n
 		Mockito.when(_mockGestorPersistencia.buscarTodos(Persona.class)).thenThrow(new RuntimeException());
 		
-		// ejecución
+		// ejecuciï¿½n
 		_dao.buscarTodos();		
 	}
 	
 //	@Test(expected=DaoException.class)
 //	public void deberia_lanzar_excepcion_si_busca_todos_los_registros_paginados_y_hay_problemas_al_realizar_consulta(){
-//		// preparación
+//		// preparaciï¿½n
 //		Mockito.when(_mockGestorPersistencia.contarRegistros()).thenReturn(3);
 //		Mockito.when(_mockGestorPersistencia.buscarTodos(2, 3)).thenThrow(new RuntimeException());
 //		
-//		// ejecución
+//		// ejecuciï¿½n
 //		_dao.buscarTodos(2,3);		
 //	}
 	
 //	@Test
 //	public void deberia_paginar_registros(){
-//		// preparación
+//		// preparaciï¿½n
 //		List<Persona> datos = new ArrayList<Persona>();
 //		datos.add(new Persona("Isma"));
 //		datos.add(new Persona("Bea"));
@@ -247,10 +247,10 @@ public class GenericSoloLecturaDaoTest {
 //		paginaResultado.setNumeroTotalRegistros(9);
 //		Mockito.when(_mockGestorPersistencia.paginar(pagina, Persona.class)).thenReturn(paginaResultado);
 //		
-//		// ejecución
+//		// ejecuciï¿½n
 //		pagina = _dao.paginar(pagina);		
 //		
-//		// verificación
+//		// verificaciï¿½n
 //		Assert.assertThat(pagina.getDatos(), IsEqual.equalTo(datos));
 //		Assert.assertThat(pagina.getNumeroRegistrosPorPagina(), IsEqual.equalTo(numRegPP));
 //		Assert.assertThat(pagina.getPagina(), IsEqual.equalTo(paginaActual));

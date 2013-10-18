@@ -18,11 +18,11 @@ import org.icabanas.jee.api.integracion.dao.IGenericDao;
  * @param <Id>
  * @param <Entidad>
  */
-public class AbstractGenericDao<Id extends Serializable, Entidad> extends
-			AbstractGenericSoloLecturaDao<Id, Entidad> implements IGenericDao<Id, Entidad> {
+public class GenericDao<Id extends Serializable, Entidad> extends
+			GenericSoloLecturaDao<Id, Entidad> implements IGenericDao<Id, Entidad> {
 
 	
-	public AbstractGenericDao() {
+	public GenericDao() {
 		super();
 	}
 	
@@ -33,7 +33,7 @@ public class AbstractGenericDao<Id extends Serializable, Entidad> extends
 //		super(gestorPersistencia);
 //	}
 
-	public AbstractGenericDao(Class<Entidad> persistentClass) {
+	public GenericDao(Class<Entidad> persistentClass) {
 		super(persistentClass);
 	}
 

@@ -22,7 +22,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 @RunWith(MockitoJUnitRunner.class)
 public class GenericDaoTest {
 
-	private AbstractGenericDao<Long, Persona> _dao;
+	private GenericDao<Long, Persona> _dao;
 	
 	@Mock
 	private IGestorPersistencia _mockGestorPersistencia;
@@ -40,10 +40,10 @@ public class GenericDaoTest {
 	
 	@Test
 	public void deberia_crear_instancia(){
-		// preparación y ejecución
-		AbstractGenericDao<Long, Persona> dao = new PersonaDaoImpl();
+		// preparaciï¿½n y ejecuciï¿½n
+		GenericDao<Long, Persona> dao = new PersonaDaoImpl();
 		
-		//verificación
+		//verificaciï¿½n
 		Assert.assertThat(dao, IsNull.notNullValue());
 		Assert.assertThat(dao.getGestorPersistencia(), IsNull.nullValue());
 		Assert.assertThat(dao.getPersistentClass(), IsEqual.equalTo(Persona.class));
@@ -52,13 +52,13 @@ public class GenericDaoTest {
 	
 	@Test
 	public void deberia_crear_instancia_con_gestor_persistencia(){
-		// preparación y ejecución
-		AbstractGenericDao<Long, Persona> dao = new PersonaDaoImpl();		
+		// preparaciï¿½n y ejecuciï¿½n
+		GenericDao<Long, Persona> dao = new PersonaDaoImpl();		
 		dao.setGestorPersistencia(_mockGestorPersistencia);		
 //		dao.setProcesadorConsultas(_mockProcesadorConsultas);
 //		Mockito.when(_mockGestorPersistencia.getProcesadorConsultas()).thenReturn(_mockProcesadorConsultas);
 		
-		//verificación
+		//verificaciï¿½n
 		Assert.assertThat(dao, IsNull.notNullValue());
 		Assert.assertThat(dao.getGestorPersistencia(), IsNull.notNullValue());
 //		Assert.assertThat(dao.getProcesadorConsultas(), IsNull.notNullValue());
@@ -67,36 +67,36 @@ public class GenericDaoTest {
 	
 	@Test
 	public void deberia_crear_una_entidad(){
-		// preparación
+		// preparaciï¿½n
 		Persona unaEntidad = new Persona("isma");
 		
-		// ejecución
+		// ejecuciï¿½n
 		_dao.crear(unaEntidad);
 		
-		// verificación
+		// verificaciï¿½n
 		Mockito.verify(_mockGestorPersistencia, VerificationModeFactory.times(1)).crear(unaEntidad);
 	}
 	
 	@Test(expected=DaoException.class)
 	public void deberia_lanzar_excepcion_si_ha_problemas_al_crear_entidad(){
-		// preparación
+		// preparaciï¿½n
 		Persona unaEntidad = new Persona("isma");
 		Mockito.doThrow(RuntimeException.class).when(_mockGestorPersistencia).crear(unaEntidad);
 		
-		// ejecución
+		// ejecuciï¿½n
 		_dao.crear(unaEntidad);
 		
-		// verificación		
+		// verificaciï¿½n		
 	}
 	
 	@Test
 	public void deberia_lanzar_excepcion_si_entidad_a_crear_es_null(){
-		// preparación
+		// preparaciï¿½n
 		Persona unaEntidad = null;
 		Throwable excepcion = null;
 		Mockito.doThrow(new IllegalArgumentException()).when(_mockGestorPersistencia).crear(unaEntidad);
 		
-		// ejecución
+		// ejecuciï¿½n
 		try{
 			_dao.crear(unaEntidad);
 		}
@@ -104,13 +104,13 @@ public class GenericDaoTest {
 			excepcion  = ex.getCause();
 		}
 		
-		// verificación		
+		// verificaciï¿½n		
 		Assert.assertThat(excepcion, Is.is(IllegalArgumentException.class));
 	}
 
 	@Test
 	public void deberia_actualizar_una_entidad(){
-		// preparación
+		// preparaciï¿½n
 		Persona unaEntidad = new Persona("isma");
 		unaEntidad.setId(1L);
 		Persona entidadModificada = new Persona("isma");
@@ -118,22 +118,22 @@ public class GenericDaoTest {
 		entidadModificada.setNombre("ismael");
 		Mockito.when(_mockGestorPersistencia.modificar(unaEntidad)).thenReturn(entidadModificada);
 		
-		// ejecución
+		// ejecuciï¿½n
 		Persona test = _dao.modificar(unaEntidad);
 		
-		// verificación
+		// verificaciï¿½n
 		Mockito.verify(_mockGestorPersistencia, VerificationModeFactory.times(1)).modificar(unaEntidad);
 		Assert.assertThat(test.getNombre(), IsEqual.equalTo("ismael"));		
 	}
 	
 	@Test
 	public void deberia_lanzar_excepcion_si_entidad_a_actualizar_es_null(){
-		// preparación
+		// preparaciï¿½n
 		Persona unaEntidad = null;
 		Throwable excepcion = null;
 		Mockito.when(_mockGestorPersistencia.modificar(unaEntidad)).thenThrow(IllegalArgumentException.class);
 		
-		// ejecución
+		// ejecuciï¿½n
 		try{
 			_dao.modificar(unaEntidad);
 		}
@@ -141,33 +141,33 @@ public class GenericDaoTest {
 			excepcion  = ex.getCause();
 		}
 		
-		// verificación		
+		// verificaciï¿½n		
 		Assert.assertThat(excepcion, Is.is(IllegalArgumentException.class));
 	}
 	
 	@Test(expected=DaoException.class)
 	public void deberia_lanzar_excepcion_si_ha_problemas_al_modificar_entidad(){
-		// preparación
+		// preparaciï¿½n
 		Persona unaEntidad = new Persona("isma");
 		Mockito.doThrow(RuntimeException.class).when(_mockGestorPersistencia).modificar(unaEntidad);
 		
-		// ejecución
+		// ejecuciï¿½n
 		_dao.modificar(unaEntidad);
 		
-		// verificación		
+		// verificaciï¿½n		
 	}
 	
 	@Test
 	public void deberia_eliminar_una_entidad(){
-		// preparación
+		// preparaciï¿½n
 		Persona unaEntidad = new Persona("isma");
 		unaEntidad.setId(1L);
 		Mockito.when(_mockGestorPersistencia.buscarPorId(1L, Persona.class)).thenReturn(null);
 				
-		// ejecución
+		// ejecuciï¿½n
 		_dao.eliminar(unaEntidad);
 		
-		// verificación
+		// verificaciï¿½n
 		Mockito.verify(_mockGestorPersistencia, VerificationModeFactory.times(1)).eliminar(unaEntidad);
 		Persona entidadEliminada = _dao.buscarPorId(unaEntidad.getId());
 		Assert.assertThat(entidadEliminada, IsNull.nullValue());
@@ -175,12 +175,12 @@ public class GenericDaoTest {
 	
 	@Test
 	public void deberia_lanzar_excepcion_si_entidad_a_eliminar_es_null(){
-		// preparación
+		// preparaciï¿½n
 		Persona unaEntidad = null;
 		Throwable excepcion = null;
 		Mockito.doThrow(IllegalArgumentException.class).when(_mockGestorPersistencia).eliminar(unaEntidad);
 		
-		// ejecución
+		// ejecuciï¿½n
 		try{
 			_dao.eliminar(unaEntidad);
 		}
@@ -188,20 +188,20 @@ public class GenericDaoTest {
 			excepcion  = ex.getCause();
 		}
 		
-		// verificación		
+		// verificaciï¿½n		
 		Assert.assertThat(excepcion, Is.is(IllegalArgumentException.class));
 	}
 	
 	@Test
 	public void deberia_eliminar_todas_las_entidades(){	
-		// preparación
+		// preparaciï¿½n
 		List<Persona> resultado = new ArrayList<Persona>();
 		Mockito.when(_mockGestorPersistencia.buscarTodos(Persona.class)).thenReturn(resultado);
 				
-		// ejecución
+		// ejecuciï¿½n
 		_dao.eliminarTodas();
 		
-		// verificación
+		// verificaciï¿½n
 		Mockito.verify(_mockGestorPersistencia, VerificationModeFactory.times(1)).eliminarTodas();
 		List<Persona> entidadesEliminadas = _dao.buscarTodos();
 		Assert.assertThat(entidadesEliminadas.size(), IsEqual.equalTo(0));
@@ -209,24 +209,24 @@ public class GenericDaoTest {
 	
 	@Test(expected=DaoException.class)
 	public void deberia_lanzar_excepcion_si_hay_problemas_al_eliminar_las_entidades(){
-		// preparación
+		// preparaciï¿½n
 		Persona unaEntidad = new Persona("isma");
 		Mockito.doThrow(RuntimeException.class).when(_mockGestorPersistencia).eliminar(unaEntidad);
 		
-		// ejecución
+		// ejecuciï¿½n
 		_dao.eliminar(unaEntidad);
 		
-		// verificación		
+		// verificaciï¿½n		
 	}
 	
 	@Test(expected=DaoException.class)
 	public void deberia_lanzar_excepcion_si_hay_problemas_al_eliminar_todas_entidades(){
-		// preparación
+		// preparaciï¿½n
 		Mockito.doThrow(RuntimeException.class).when(_mockGestorPersistencia).eliminarTodas();
 		
-		// ejecución
+		// ejecuciï¿½n
 		_dao.eliminarTodas();
 		
-		// verificación		
+		// verificaciï¿½n		
 	}		
 }

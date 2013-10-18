@@ -34,5 +34,10 @@ public class EliminarException extends Exception {
 		}
 		return null;
 	}
+
+	public String getCodigoError() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }

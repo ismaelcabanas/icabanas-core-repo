@@ -4,7 +4,7 @@ import org.icabanas.jee.api.integracion.entidad.Persona;
 
 
 public class PersonaDaoImpl extends
-		AbstractGenericDao<Long, Persona> {
+		GenericDao<Long, Persona> {
 
 	public PersonaDaoImpl() {
 		super();
