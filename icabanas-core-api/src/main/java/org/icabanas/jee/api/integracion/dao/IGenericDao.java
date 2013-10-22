@@ -6,7 +6,7 @@ import java.io.Serializable;
 
 
 /**
- * Patrón Data Access Object (DAO): Nos abstrae de cualquier tipo de base de datos o mecanismo de 
+ * Patrï¿½n Data Access Object (DAO): Nos abstrae de cualquier tipo de base de datos o mecanismo de 
  * persistencia. Proporciona operaciones sin exponer los detalles del mecanismo de persistencia.
  * <br/><br/>
  * <b>Responsabilidad</b> :  
@@ -28,18 +28,18 @@ import java.io.Serializable;
 public interface IGenericDao<Id extends Serializable, Entidad> extends IGenericSoloLecturaDao<Id, Entidad> {
 
 	/**
-	 * Método que almacena los datos de una entidad en el repositorio de datos.
+	 * Mï¿½todo que almacena los datos de una entidad en el repositorio de datos.
 	 * 
 	 * @param unaEntidad
 	 * 		Instancia de tipo Entidad a persistir.
 	 * 
 	 * @throws
-	 * 		Si se produce alguna excepción durante la creación de la entidad.
+	 * 		Si se produce alguna excepciï¿½n durante la creaciï¿½n de la entidad.
 	 */
 	void crear(Entidad unaEntidad) throws DaoException;
 
 	/**
-	 * Método que modifica los datos de una entidad del repositorio de datos.
+	 * Mï¿½todo que modifica los datos de una entidad del repositorio de datos.
 	 * 
 	 * @param unaEntidad
 	 * 		Instancia de tipo Entidad a modificar.
@@ -48,28 +48,27 @@ public interface IGenericDao<Id extends Serializable, Entidad> extends IGenericS
 	 * 		Isntancia de tipo Entidad modificada.
 	 * 
 	 * @throws DaoException
-	 * 		Si se produce una excepción durante la modificación de la entidad.
+	 * 		Si se produce una excepciï¿½n durante la modificaciï¿½n de la entidad.
 	 */
 	Entidad modificar(Entidad unaEntidad) throws DaoException;
 
 	/**
-	 * Método que elimina una entidad del repositorio de datos.
+	 * Mï¿½todo que elimina una entidad del repositorio de datos.
 	 * 
 	 * @param unaEntidad
 	 * 		Instancia de tipo Entidad a eliminar.
 	 * 
 	 * @throws DaoException
-	 * 		Si se produce una excepción durante la eliminación de la entidad.
+	 * 		Si se produce una excepciï¿½n durante la eliminaciï¿½n de la entidad.
 	 */
 	void eliminar(Entidad unaEntidad) throws DaoException;
 
 	/**
-	 * Método que elimina todas las entidades del repositorio de datos.
+	 * Mï¿½todo que elimina todas las entidades del repositorio de datos.
 	 * 
 	 * @throws DaoException
-	 * 		Si se produce alguna excepción al eliminar las entidades.
+	 * 		Si se produce alguna excepciï¿½n al eliminar las entidades.
 	 */
-	void eliminarTodas() throws DaoException;
-
+	void eliminarTodas() throws DaoException;	
 	
 }

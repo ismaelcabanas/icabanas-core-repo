@@ -6,7 +6,7 @@ import java.util.List;
 
 
 /**
- * Patrón Data Access Object (DAO): Nos abstrae de cualquier tipo de base de datos o mecanismo de 
+ * Patrï¿½n Data Access Object (DAO): Nos abstrae de cualquier tipo de base de datos o mecanismo de 
  * persistencia. Proporciona operaciones sin exponer los detalles del mecanismo de persistencia.
  * <br/><br/>
  * <b>Responsabilidad</b> :  Proporciona acceso a datos de solo lectura.
@@ -45,9 +45,9 @@ public interface IGenericSoloLecturaDao<Id extends Serializable,Entidad> {
 //	 * Devuelve todas las entidades de tipo <Entidad> del mecanismo de persistencia paginado.
 //	 * 
 //	 * @param paginaActual
-//	 * 		Página actual
+//	 * 		Pï¿½gina actual
 //	 * @param numeroRegistrosPorPagina
-//	 * 		Número de reigstros por página.
+//	 * 		Nï¿½mero de reigstros por pï¿½gina.
 //	 * @return
 //	 * 		Instancia de {@link ResultadoPaginado}.
 //	 * @throws
@@ -56,7 +56,7 @@ public interface IGenericSoloLecturaDao<Id extends Serializable,Entidad> {
 //	ResultadoPaginado<Entidad> buscarTodos(int paginaActual, int numeroRegistrosPorPagina) throws DaoException;
 	
 	/**
-	 * Devuelve las entidades de tipo Entidad en base a un filtro de búsqueda.
+	 * Devuelve las entidades de tipo Entidad en base a un filtro de bï¿½squeda.
 	 * 
 	 * @param filtro
 	 * @return
@@ -65,7 +65,7 @@ public interface IGenericSoloLecturaDao<Id extends Serializable,Entidad> {
 	List<Entidad> buscar(IFiltro filtro) throws DaoException;
 	
 	/**
-	 * Devuelve la entidad que coincide con el filtro de la búsqueda.
+	 * Devuelve la entidad que coincide con el filtro de la bï¿½squeda.
 	 * 
 	 * @param filtro
 	 * @return
@@ -77,7 +77,7 @@ public interface IGenericSoloLecturaDao<Id extends Serializable,Entidad> {
 	 * Pagina un conjunto de registros.
 	 * 
 	 * @param pagina
-	 * 		La página
+	 * 		La pï¿½gina
 	 * @return
 	 * @throws DaoException
 	 */
@@ -86,10 +86,18 @@ public interface IGenericSoloLecturaDao<Id extends Serializable,Entidad> {
 //	/**
 //	 * Devuelve una nueva instancia del procesador de consultas. 
 //	 * 
-//	 * El procesador de consultas se encarga de realizar consultas de sólo lectura al mecanismo de persistencia, 
+//	 * El procesador de consultas se encarga de realizar consultas de sï¿½lo lectura al mecanismo de persistencia, 
 //	 * y por tanto, se devuelve una instancia nueva ya que cada consulta es distinta.
 //	 * 
 //	 * @return
 //	 */
 //	IProcesadorConsultas<Entidad> getProcesadorConsultas();
+	
+	/**
+	 * Establece el gestor de persistencia.
+	 * 
+	 * @param gestorPersistencia
+	 * 		El gestor de persistencia.
+	 */
+	void setGestorPersistencia(IGestorPersistencia gestorPersistencia);
 }
