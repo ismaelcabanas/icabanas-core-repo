@@ -7,7 +7,21 @@
   
   <modules>
   	<module>../icabanas-core-api</module>
+  	<module>icabanas-core-api-test</module>
   </modules>
+
+  <properties>
+  	<slf4j.version>1.6.1</slf4j.version>
+  	<spring-framework.version>3.1.2.RELEASE</spring-framework.version>
+  	<hibernate.version>4.1.7.Final</hibernate.version>
+  	<hsqldb.version>1.8.0.10</hsqldb.version>
+  	<powermock.version>1.5</powermock.version>
+  	<jpa.dependency.groupid>org.hibernate.java-persistence</jpa.dependency.groupid>
+  	<jpa.dependency.artifactid>jpa-api</jpa.dependency.artifactid>
+  	<jpa.dependency.version>2.0-cr-1</jpa.dependency.version>
+  	<spring.framework.version>3.1.2.RELEASE</spring.framework.version>  	
+  	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
   
   <build>
   	<plugins>
