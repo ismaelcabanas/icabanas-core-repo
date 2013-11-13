@@ -9,6 +9,7 @@ import org.junit.Before;
 
 
 public abstract class AbstractTestIT {
+	private static final String DEFAULT_PERSISTENCE_UNIT_NAME = "HibernateJPATest";
 	private EntityManagerFactory entityManagerFactory;
     private EntityManager entityManager;
 	private String persistenceUnitName;
@@ -16,6 +17,7 @@ public abstract class AbstractTestIT {
 	
     
     public AbstractTestIT() {
+    	this.persistenceUnitName = DEFAULT_PERSISTENCE_UNIT_NAME;
 	}
 
 	public AbstractTestIT(String persistenceUnitName) {
