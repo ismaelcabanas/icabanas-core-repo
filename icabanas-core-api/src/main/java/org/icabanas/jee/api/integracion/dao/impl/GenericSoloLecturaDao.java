@@ -57,6 +57,7 @@ public class GenericSoloLecturaDao<Id extends Serializable, Entidad> implements
 	 * @see org.icabanas.jee.api.integracion.dao.IGenericSoloLecturaDao#buscarPorId(java.lang.Object)
 	 */
 	public Entidad buscarPorId(Id unId) throws DaoException {
+		validaGestorPersistencia();
 		try{														
 			Entidad entidad = gestorPersistencia.buscarPorId(unId, persistentClass);				
 			
@@ -71,6 +72,7 @@ public class GenericSoloLecturaDao<Id extends Serializable, Entidad> implements
 	 * @see org.icabanas.jee.api.integracion.dao.IGenericSoloLecturaDao#buscarTodos()
 	 */
 	public List<Entidad> buscarTodos() throws DaoException {
+		validaGestorPersistencia();
 		try{
 			List<Entidad> elementos = gestorPersistencia.buscarTodos(persistentClass);
 			
@@ -121,6 +123,7 @@ public class GenericSoloLecturaDao<Id extends Serializable, Entidad> implements
 
 	
 	public IPaginador<Entidad> paginar(IPaginador<Entidad> pagina) throws DaoException {
+		validaGestorPersistencia();
 		try{
 			Validate.isTrue(pagina != null, "El par�metro pagina no puede ser nulo.");
 			Validate.isTrue(pagina.getPagina() >= 1, "La p�gina actual de la paginaci�n debe ser >= 1.");
@@ -158,6 +161,7 @@ public class GenericSoloLecturaDao<Id extends Serializable, Entidad> implements
 
 	@Override
 	public List<Entidad> buscar(IFiltro filtro) throws DaoException {
+		validaGestorPersistencia();
 		try{
 			Validate.isTrue(filtro != null, "El par�metro filtro no puede ser nulo.");
 			
@@ -174,6 +178,7 @@ public class GenericSoloLecturaDao<Id extends Serializable, Entidad> implements
 
 	@Override
 	public <Entidad> Entidad buscarUnico(IFiltro filtro) throws DaoException {
+		validaGestorPersistencia();
 		try{
 			Entidad entidad = null;
 			if(filtro != null){
@@ -230,5 +235,7 @@ public class GenericSoloLecturaDao<Id extends Serializable, Entidad> implements
 		this.criteriaBuilderMap = criteriaBuilderMap;
 	}
 	
-	
+	protected void validaGestorPersistencia() {
+		Validate.notNull(getGestorPersistencia(), "El gestor de persistencia es nulo");
+	}
 }

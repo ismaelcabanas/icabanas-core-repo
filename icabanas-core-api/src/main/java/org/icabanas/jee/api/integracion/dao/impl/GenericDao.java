@@ -2,6 +2,7 @@ package org.icabanas.jee.api.integracion.dao.impl;
 
 import java.io.Serializable;
 
+import org.apache.commons.lang.Validate;
 import org.icabanas.jee.api.integracion.dao.DaoException;
 import org.icabanas.jee.api.integracion.dao.IGenericDao;
 
@@ -43,6 +44,7 @@ public class GenericDao<Id extends Serializable, Entidad> extends
 	 * @see org.icabanas.jee.api.integracion.dao.IGenericDao#crear(java.lang.Object)
 	 */
 	public void crear(Entidad unaEntidad) throws DaoException {
+		validaGestorPersistencia();
 		try{
 			getGestorPersistencia().crear(unaEntidad);
 		}
@@ -55,6 +57,7 @@ public class GenericDao<Id extends Serializable, Entidad> extends
 	 * @see org.icabanas.jee.api.integracion.dao.IGenericDao#modificar(java.lang.Object)
 	 */
 	public Entidad modificar(Entidad unaEntidad) throws DaoException {
+		validaGestorPersistencia();
 		try{			
 			return getGestorPersistencia().modificar(unaEntidad);
 		}
@@ -67,6 +70,7 @@ public class GenericDao<Id extends Serializable, Entidad> extends
 	 * @see org.icabanas.jee.api.integracion.dao.IGenericDao#eliminar(java.lang.Object)
 	 */
 	public void eliminar(Entidad unaEntidad) throws DaoException {
+		validaGestorPersistencia();
 		try{			
 			getGestorPersistencia().eliminar(unaEntidad);
 		}
@@ -79,13 +83,13 @@ public class GenericDao<Id extends Serializable, Entidad> extends
 	 * @see org.icabanas.jee.api.integracion.dao.IGenericDao#eliminarTodas()
 	 */
 	public void eliminarTodas() throws DaoException {
+		validaGestorPersistencia();
 		try{
 			getGestorPersistencia().eliminarTodas();
 		}
 		catch(RuntimeException e){
 			throw new DaoException(e);
 		}
-	}
-
+	}	
 	
 }
