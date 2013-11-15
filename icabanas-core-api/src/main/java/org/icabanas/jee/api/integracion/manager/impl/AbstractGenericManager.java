@@ -32,7 +32,7 @@ public abstract class AbstractGenericManager<Id extends Serializable, Dto extend
 	public Dto registrar(Dto dto) throws RegistrarException {
 		logger.debug("Registrando la entidad: " + dto);
 		
-		// compruebo el paráemtro de entrada
+		// compruebo el parï¿½emtro de entrada
 		if(dto == null){
 			throw new IllegalArgumentException("El DTO de entrada no puede ser nulo.");
 		}
@@ -43,7 +43,7 @@ public abstract class AbstractGenericManager<Id extends Serializable, Dto extend
 			entidad = crearEntidad(dto);
 		}
 		catch(ValidacionException e){
-			logger.error("Dto no válido: " + dto);
+			logger.error("Dto no vï¿½lido: " + dto);
 			throw new RegistrarException(e);
 		}
 		
@@ -70,7 +70,7 @@ public abstract class AbstractGenericManager<Id extends Serializable, Dto extend
 		// busco la entidad a modificar
 		En entidad = dao.buscarPorId(dto.getId());
 		
-		// si existe la entidad la modifico, en caso contrario lanzo una excepción
+		// si existe la entidad la modifico, en caso contrario lanzo una excepciï¿½n
 		if(entidad != null){
 			try {
 				actualizarEntidad(entidad,dto);
@@ -132,29 +132,44 @@ public abstract class AbstractGenericManager<Id extends Serializable, Dto extend
 			paginador = dao.paginar(pag);
 		}
 		catch(DaoException ex){
-			throw new PaginacionException("Error en la paginación.", ex);
+			throw new PaginacionException("Error en la paginaciï¿½n.", ex);
 		}
 		
-		List<Dto> datos = new ArrayList<Dto>();
-		for (En en : paginador.getDatos()) {
-			datos.add(adaptarToDto(en));
-		}
+		List<Dto> datos = adaptaToDtos(paginador.getDatos());
 		
 		pagina.setDatos(datos);
 		pagina.setNumeroTotalRegistros(paginador.getNumeroTotalRegistros());
 	}
 	
 	@Override
+	public List<Dto> buscarTodas() {
+		List<En> resultado = dao.buscarTodos();
+		
+		List<Dto> datos = adaptaToDtos(resultado);
+		
+		return datos;
+	}
+
+	@Override
+	public List<Dto> buscar(IFiltro filtro) {
+		List<En> resultado = dao.buscar(filtro);
+
+		List<Dto> datos = adaptaToDtos(resultado);
+		
+		return datos;
+	}	
+
+	@Override
 	public boolean validar(Dto dto) throws ValidacionException {
 		logger.debug("Validando la entidad " + dto);
 		if(dto == null){
-			throw new IllegalArgumentException("El parámetro de entrada no puede ser nulo.");
+			throw new IllegalArgumentException("El parï¿½metro de entrada no puede ser nulo.");
 		}
 		
 		En entidad = adaptarToEntidad(dto);
 		
 		boolean resultado = entidad.valida();
-		logger.debug("El resultado de la validación ha sido " + resultado);
+		logger.debug("El resultado de la validaciï¿½n ha sido " + resultado);
 		
 		return resultado;
 	}	
@@ -202,7 +217,7 @@ public abstract class AbstractGenericManager<Id extends Serializable, Dto extend
 	 * @return
 	 * 		La entidad.
 	 * @throws ValidacionException
-	 * 		Si se produce un error de validación al crear la entidad o la entidad existía con anterioridad.
+	 * 		Si se produce un error de validaciï¿½n al crear la entidad o la entidad existï¿½a con anterioridad.
 	 */
 	protected abstract En crearEntidad(Dto dto) throws ValidacionException;
 	
@@ -213,9 +228,23 @@ public abstract class AbstractGenericManager<Id extends Serializable, Dto extend
 	 * @param dto
 	 * 		El Dto.
 	 * @throws ValidacionException
-	 * 		Si se produce un error de validación al actualizar la entidad
+	 * 		Si se produce un error de validaciï¿½n al actualizar la entidad
 	 */
 	protected abstract void actualizarEntidad(En entidad, Dto dto) throws ValidacionException;
 	
-	
+	/**
+	 * Adapta el listado de entidades a un listado de dtos.
+	 * 
+	 * @param entidades
+	 * 		Listado de entidades
+	 * @return
+	 * 		Listado de Dtos adaptados.
+	 */
+	private List<Dto> adaptaToDtos(List<En> entidades) {
+		List<Dto> datos = new ArrayList<Dto>();
+		for (En en : entidades) {
+			datos.add(adaptarToDto(en));
+		}
+		return datos;
+	}
 }

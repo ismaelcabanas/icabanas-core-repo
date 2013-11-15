@@ -1,6 +1,7 @@
 package org.icabanas.jee.api.integracion.manager;
 
 import java.io.Serializable;
+import java.util.List;
 
 import org.icabanas.jee.api.integracion.dao.IFiltro;
 import org.icabanas.jee.api.integracion.dao.Pagina;
@@ -14,22 +15,22 @@ import org.icabanas.jee.api.integracion.manager.exceptions.ValidacionException;
 public interface IGenericManager<Id extends Serializable, Dto extends Serializable> {
 
 	/**
-	 * Método que registra una entidad en el catálogo.
+	 * Mï¿½todo que registra una entidad en el catï¿½logo.
 	 * 
 	 * @param dto
 	 * 		La entidad a registrar
 	 * @return
 	 * 		La entidad registrada
 	 * @throws RegistrarException
-	 * 		Si se produce alguna excepción al registrar la entidad
+	 * 		Si se produce alguna excepciï¿½n al registrar la entidad
 	 */
 	Dto registrar(Dto dto) throws RegistrarException;
 	
 	/**
-	 * Método que actualiza las características de una entidad.
+	 * Mï¿½todo que actualiza las caracterï¿½sticas de una entidad.
 	 * 
 	 * @param 
-	 * 		dto Las nuevas características de la entidad.
+	 * 		dto Las nuevas caracterï¿½sticas de la entidad.
 	 * 
 	 * @return La entidad actualizada.
 	 * 
@@ -37,24 +38,24 @@ public interface IGenericManager<Id extends Serializable, Dto extends Serializab
 	 * 		NoExisteEntidadException Si la entidad no existe en sistema de almacenamiento.
 	 * 
 	 * @throws 
-	 * 		ModificarException Si se produce alguna excepción de validación al actualizar la entidad. 	 
+	 * 		ModificarException Si se produce alguna excepciï¿½n de validaciï¿½n al actualizar la entidad. 	 
 	 */
 	Dto actualizar(Dto dto) throws ModificarException, NoExisteEntidadException;
 	
 	/**
-	 * Método que elimina una entidad del catálogo.
+	 * Mï¿½todo que elimina una entidad del catï¿½logo.
 	 * 
 	 * @param 
 	 * 		id Identificador de la entidad
 	 * @throws 
 	 * 		NoExisteEntidadException si no existe la entidad
 	 * @throws 
-	 * 		EliminarException si se produce algún error al eliminar la entidad
+	 * 		EliminarException si se produce algï¿½n error al eliminar la entidad
 	 */
 	void eliminar(Id id) throws NoExisteEntidadException, EliminarException;
 	
 	/**
-	 * Método que realiza una búsqueda de entidad por identificador.
+	 * Mï¿½todo que realiza una bï¿½squeda de entidad por identificador.
 	 * 
 	 * @param 
 	 * 		id el identificador de la entidad
@@ -67,36 +68,54 @@ public interface IGenericManager<Id extends Serializable, Dto extends Serializab
 	Dto buscarPorId(Id id) throws NoExisteEntidadException;
 	
 	/**
-	 * Realiza una búsqueda paginada en base a un criterio de búsqueda definido en el objeto {@link Pagina}.
+	 * Realiza una bï¿½squeda paginada en base a un criterio de bï¿½squeda definido en el objeto {@link Pagina}.
 	 * 
 	 * @param pagina
 	 * @throws PaginacionException
-	 * 		Si se produce alguna excepción durante la paginación.
+	 * 		Si se produce alguna excepciï¿½n durante la paginaciï¿½n.
 	 */
 	void paginar(Pagina<Dto> pagina) throws PaginacionException;
 	
 	/**
-	 * Método que comprueba si el dto es válido
+	 * Devuelve todos los registros convertidos en Dtos de una entidad.
+	 * 
+	 * @return
+	 * 		Lista de Dtos
+	 */
+	List<Dto> buscarTodas();
+	
+	/**
+	 * Devuelve todos los registros convertidos en Dtos de una entidad en base a un criterio de bÃºsqueda.
+	 * 
+	 * @param filtro
+	 * 		El filtro de bÃºsqueda
+	 * @return
+	 * 		Lista de Dtos		
+	 */
+	List<Dto> buscar(IFiltro filtro);
+	
+	/**
+	 * Mï¿½todo que comprueba si el dto es vï¿½lido
 	 * 
 	 * @param 
 	 * 		dto El Dto a validar.
 	 * 
 	 * @return 
-	 * 		True si es Dto es válido
+	 * 		True si es Dto es vï¿½lido
 	 * 
 	 * @throws 
-	 * 		ValidacionException Si el Dto no es válido, indicando qué campos son los incorrectos.
+	 * 		ValidacionException Si el Dto no es vï¿½lido, indicando quï¿½ campos son los incorrectos.
 	 * 
 	 * @throws 
-	 * 		IllegalArgumentException Si el parámetro de entrada es nulo.
+	 * 		IllegalArgumentException Si el parï¿½metro de entrada es nulo.
 	 */
 	boolean validar(Dto dto) throws ValidacionException;
 
 	/**
-	 * Limpia el filtro de búsqueda, es decir, establece los valores del filtro a su valor por defecto.
+	 * Limpia el filtro de bï¿½squeda, es decir, establece los valores del filtro a su valor por defecto.
 	 * 
 	 * @param filtro
-	 * 		El filtro de búsqueda.
+	 * 		El filtro de bï¿½squeda.
 	 */
 	void limpiarFiltro(IFiltro filtro);	
 }
