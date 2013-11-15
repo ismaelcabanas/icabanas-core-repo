@@ -64,7 +64,8 @@ public abstract class AbstractTestIT {
 	}
 
 	private void cerrarConexion() {
-		this.entityManager.getTransaction().commit();
+		//this.entityManager.getTransaction().commit();
+		this.entityManager.getTransaction().rollback();
 		this.entityManager.close();
 	}
 	
